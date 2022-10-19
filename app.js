@@ -1,6 +1,5 @@
 import express from "express";
-import path from "path";
-import { join } from "path";
+import path, { join } from "path";
 
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
