@@ -1,18 +1,23 @@
-const express = require("express");
-const path = require("path");
+import express from "express";
+import path from "path";
+import { join } from "path";
 
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
 const app = express();
-function loadViewFile(viewFile) {
-  path.join(__dirname, "views", viewFile + ".html");
+function loadViewFile(res, viewFile) {
+  res.sendFile(join(__dirname, "views", viewFile + ".html"));
 }
 app.get("/", (req, res) => {
-  res.sendFile(path.join(loadViewFile("home")));
+  loadViewFile(res, "home");
 });
 app.get("/about", (req, res) => {
-  res.sendFile(loadViewFile("about"));
+  loadViewFile(res, "about");
 });
 app.get("/contact", (req, res) => {
-  res.sendFile(loadViewFile("contact"));
+  loadViewFile(res, "contact");
 });
 
 app.listen(process.env.PORT || 5000);
